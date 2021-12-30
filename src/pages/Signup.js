@@ -4,9 +4,8 @@ import { useSignup } from '../hooks/useSignup';
 export const Signup = () => {
   const formRef = useRef(null);
 
-  const [signupUser, error] = useSignup();
+  const [signupUser, error, isPending] = useSignup();
 
-  const [isPending, setIsPending] = useState(false);
   const [signup, setSignup] = useState({
     email: '',
     password: '',
@@ -24,7 +23,6 @@ export const Signup = () => {
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    setIsPending(true);
 
     signupUser(
       signup.email,

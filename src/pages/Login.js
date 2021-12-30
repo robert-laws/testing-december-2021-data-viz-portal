@@ -4,13 +4,11 @@ import { useLogin } from '../hooks/useLogin';
 export const Login = () => {
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
-  const [isPending, setIsPending] = useState(false);
 
-  const [login, error] = useLogin();
+  const [login, error, isPending] = useLogin();
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    setIsPending(true);
     login(email, password);
   };
 
