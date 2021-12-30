@@ -13,7 +13,6 @@ function App() {
 
   useEffect(() => {
     if (user !== null) {
-      // console.log(user.uid);
       loadProfile(user.uid);
     } else {
       clearProfile();
