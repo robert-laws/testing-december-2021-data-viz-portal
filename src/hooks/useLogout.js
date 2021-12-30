@@ -1,5 +1,5 @@
-import { useNavigate } from 'react-router-dom';
 import { useState, useEffect } from 'react';
+import { useNavigate } from 'react-router-dom';
 import { getAuth, signOut } from 'firebase/auth';
 
 export const useLogout = () => {
@@ -22,7 +22,7 @@ export const useLogout = () => {
         setIsPending(false);
       }
 
-      navigate('/', { replace: true });
+      navigate('/');
     } catch (err) {
       if (!isCancelled) {
         setError(err.message);

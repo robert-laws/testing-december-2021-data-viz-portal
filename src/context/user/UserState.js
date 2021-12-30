@@ -10,7 +10,6 @@ const UserState = ({ children }) => {
   const initialState = {
     profile: null,
     profileError: null,
-    profilePending: true,
   };
 
   const [state, dispatch] = useReducer(userReducer, initialState);
@@ -43,7 +42,6 @@ const UserState = ({ children }) => {
       value={{
         profile: state.profile,
         profileError: state.profileError,
-        profilePending: state.profilePending,
         loadProfile,
         clearProfile,
       }}

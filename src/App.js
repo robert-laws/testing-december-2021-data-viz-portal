@@ -43,14 +43,7 @@ function App() {
                 </PrivateRoute>
               }
             />
-            <Route
-              path='/profile'
-              element={
-                <PrivateRoute user={!user}>
-                  <Profile />
-                </PrivateRoute>
-              }
-            />
+            <Route path='/profile' element={<Profile />} />
             <Route path='/knowledge-base' element={<KnowledgeBase />} />
             <Route path='*' element={<NotFound />} />
           </Routes>
