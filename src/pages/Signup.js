@@ -1,6 +1,8 @@
-import { useState } from 'react';
+import { useState, useRef } from 'react';
 
 export const Signup = () => {
+  const formRef = useRef(null);
+  const [error, setError] = useState('');
   const [signup, setSignup] = useState({
     email: '',
     password: '',
@@ -18,11 +20,13 @@ export const Signup = () => {
   const handleSubmit = (e) => {
     e.preventDefault();
     console.log(signup);
+    setError('please remember to enter a value for email and password');
+    formRef.current.reset();
   };
 
   return (
     <div>
-      <form className='app-form' onSubmit={handleSubmit}>
+      <form className='app-form' onSubmit={handleSubmit} ref={formRef}>
         <h2>Signup</h2>
         <label>
           <span>email</span>
@@ -84,7 +88,10 @@ export const Signup = () => {
             <option value='hist'>HIST</option>
           </select>
         </label>
-        <button>Signup</button>
+        <div className='form-submit'>
+          <button>Signup</button>
+          <span className='error'>{error}</span>
+        </div>
       </form>
     </div>
   );

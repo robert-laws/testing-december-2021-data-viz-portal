@@ -46,9 +46,18 @@
   textarea {
     min-height: 16rem;
   }
-  .error {
-    color: a.$error-color;
-  }
 
-  @include a.button(a.$primary-color);
+  .form-submit {
+    min-height: 7rem;
+    padding-top: 1.2rem;
+    display: flex;
+    align-items: center;
+    gap: 2rem;
+
+    @include a.button(a.$primary-color);
+
+    .error {
+      color: a.$error-color;
+    }
+  }
 }
