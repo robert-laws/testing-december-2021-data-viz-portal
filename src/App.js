@@ -1,5 +1,6 @@
 import './sass/main.scss';
 import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
+import { Header } from './components';
 import { Home, Login, Signup, Profile, KnowledgeBase, NotFound } from './pages';
 import { useAuthContext } from './hooks/useAuthContext';
 
@@ -10,9 +11,7 @@ function App() {
 
   return (
     <Router>
-      <div className='App'>
-        <h1>App</h1>
-      </div>
+      <Header />
       <Routes>
         <Route path='/' element={<Home />} />
         <Route path='/login' element={<Login />} />
