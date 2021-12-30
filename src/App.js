@@ -1,8 +1,13 @@
 import './sass/main.scss';
 import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
 import { Home, Login, Signup, Profile, KnowledgeBase, NotFound } from './pages';
+import { useAuthContext } from './hooks/useAuthContext';
 
 function App() {
+  const { user, authIsReady } = useAuthContext();
+
+  console.log(authIsReady, user);
+
   return (
     <Router>
       <div className='App'>

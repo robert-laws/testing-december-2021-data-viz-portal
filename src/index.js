@@ -2,10 +2,13 @@ import React from 'react';
 import ReactDOM from 'react-dom';
 import './firebase/config';
 import App from './App';
+import AuthState from './context/auth/AuthState';
 
 ReactDOM.render(
   <React.StrictMode>
-    <App />
+    <AuthState>
+      <App />
+    </AuthState>
   </React.StrictMode>,
   document.getElementById('root')
 );
