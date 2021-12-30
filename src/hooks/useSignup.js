@@ -1,5 +1,6 @@
 import { useState, useEffect } from 'react';
 import { getAuth, createUserWithEmailAndPassword } from 'firebase/auth';
+import { getFirestore, doc, setDoc } from 'firebase/firestore';
 
 export const useSignup = () => {
   const [isCancelled, setIsCancelled] = useState(false);
@@ -7,8 +8,16 @@ export const useSignup = () => {
   const [isPending, setIsPending] = useState(false);
 
   const auth = getAuth();
+  const db = getFirestore();
 
-  const signupUser = async (email, password) => {
+  const signupUser = async (
+    email,
+    password,
+    firstName,
+    lastName,
+    studentClass,
+    major
+  ) => {
     setError(null);
     setIsPending(true);
 
@@ -27,21 +36,26 @@ export const useSignup = () => {
           setIsPending(false);
         }
 
-        console.log('User created, ready to update profile');
+        const userUid = credential.user.uid;
 
-        // try {
-        //   await updateProfile(auth.currentUser, { displayName: displayName });
+        try {
+          await setDoc(doc(db, 'users', userUid), {
+            firstName,
+            lastName,
+            studentClass,
+            major,
+          });
 
-        //   if (!isCancelled) {
-        //     setError(null);
-        //     setIsPending(false);
-        //   }
-        // } catch (err) {
-        //   if (!isCancelled) {
-        //     setError(err.message);
-        //     setIsPending(false);
-        //   }
-        // }
+          if (!isCancelled) {
+            setError(null);
+            setIsPending(false);
+          }
+        } catch (err) {
+          if (!isCancelled) {
+            setError(err.message);
+            setIsPending(false);
+          }
+        }
       }
     } catch (err) {
       if (!isCancelled) {

@@ -23,7 +23,14 @@ export const Signup = () => {
   const handleSubmit = (e) => {
     e.preventDefault();
 
-    signupUser(signup.email, signup.password);
+    signupUser(
+      signup.email,
+      signup.password,
+      signup.firstName,
+      signup.lastName,
+      signup.studentClass,
+      signup.major
+    );
 
     formRef.current.reset();
   };
