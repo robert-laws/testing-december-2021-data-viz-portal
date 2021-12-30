@@ -22,7 +22,8 @@ export const useSignup = () => {
     firstName,
     lastName,
     studentClass,
-    major
+    major,
+    meetingDay
   ) => {
     setError(null);
     setIsPending(true);
@@ -50,6 +51,7 @@ export const useSignup = () => {
             lastName,
             studentClass,
             major,
+            meetingDay,
           });
 
           if (!isCancelled) {

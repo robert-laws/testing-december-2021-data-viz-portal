@@ -4,11 +4,13 @@ import { useLogin } from '../hooks/useLogin';
 export const Login = () => {
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
+  const [isPending, setIsPending] = useState(false);
 
   const [login, error] = useLogin();
 
   const handleSubmit = (e) => {
     e.preventDefault();
+    setIsPending(true);
     login(email, password);
   };
 
@@ -35,7 +37,9 @@ export const Login = () => {
           />
         </label>
         <div className='form-submit'>
-          <button>Login</button>
+          <button className={`${isPending && 'button-loading'}`}>
+            <span className='button-text'>Login</span>
+          </button>
           {error && <span className='error'>{error}</span>}
         </div>
       </form>

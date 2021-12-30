@@ -6,6 +6,7 @@ export const Signup = () => {
 
   const [signupUser, error] = useSignup();
 
+  const [isPending, setIsPending] = useState(false);
   const [signup, setSignup] = useState({
     email: '',
     password: '',
@@ -13,6 +14,7 @@ export const Signup = () => {
     lastName: '',
     studentClass: '',
     major: '',
+    meetingDay: '',
   });
 
   const handleChange = (e) => {
@@ -22,6 +24,7 @@ export const Signup = () => {
 
   const handleSubmit = (e) => {
     e.preventDefault();
+    setIsPending(true);
 
     signupUser(
       signup.email,
@@ -29,7 +32,8 @@ export const Signup = () => {
       signup.firstName,
       signup.lastName,
       signup.studentClass,
-      signup.major
+      signup.major,
+      signup.meetingDay
     );
 
     formRef.current.reset();
@@ -39,68 +43,105 @@ export const Signup = () => {
     <div>
       <form className='app-form' onSubmit={handleSubmit} ref={formRef}>
         <h2>Signup</h2>
-        <label>
-          <span>email</span>
-          <input
-            type='email'
-            name='email'
-            value={signup.email}
-            onChange={handleChange}
-          />
-        </label>
-        <label>
-          <span>password</span>
-          <input
-            type='password'
-            name='password'
-            value={signup.password}
-            onChange={handleChange}
-          />
-        </label>
-        <label>
-          <span>first name</span>
-          <input
-            type='text'
-            name='firstName'
-            value={signup.firstName}
-            onChange={handleChange}
-          />
-        </label>
-        <label>
-          <span>last name</span>
-          <input
-            type='text'
-            name='lastName'
-            value={signup.lastName}
-            onChange={handleChange}
-          />
-        </label>
-        <label>
-          <span>class</span>
-          <select
-            value={signup.studentClass}
-            name='studentClass'
-            onChange={handleChange}
-          >
-            <option value='0'>Select your class</option>
-            <option value='first-year'>first year</option>
-            <option value='sophomore'>sophomore</option>
-            <option value='junior'>junior</option>
-            <option value='senior'>senior</option>
-          </select>
-        </label>
-        <label>
-          <span>major</span>
-          <select value={signup.major} name='major' onChange={handleChange}>
-            <option value='0'>Select your major</option>
-            <option value='econ'>ECON</option>
-            <option value='ipol'>IPOL</option>
-            <option value='culp'>CULP</option>
-            <option value='hist'>HIST</option>
-          </select>
-        </label>
+        <div className='fields'>
+          <label>
+            <span>email</span>
+            <input
+              type='email'
+              name='email'
+              value={signup.email}
+              onChange={handleChange}
+            />
+          </label>
+        </div>
+        <div className='fields'>
+          <label>
+            <span>password</span>
+            <input
+              type='password'
+              name='password'
+              value={signup.password}
+              onChange={handleChange}
+            />
+          </label>
+        </div>
+        <div className='fields'>
+          <label>
+            <span>first name</span>
+            <input
+              type='text'
+              name='firstName'
+              value={signup.firstName}
+              onChange={handleChange}
+            />
+          </label>
+          <label>
+            <span>last name</span>
+            <input
+              type='text'
+              name='lastName'
+              value={signup.lastName}
+              onChange={handleChange}
+            />
+          </label>
+        </div>
+        <div className='fields'>
+          <label>
+            <span>class</span>
+            <select
+              value={signup.studentClass}
+              name='studentClass'
+              onChange={handleChange}
+            >
+              <option value='0'>Select your class</option>
+              <option value='first-year'>first year</option>
+              <option value='sophomore'>sophomore</option>
+              <option value='junior'>junior</option>
+              <option value='senior'>senior</option>
+            </select>
+          </label>
+          <label>
+            <span>major</span>
+            <select value={signup.major} name='major' onChange={handleChange}>
+              <option value='0'>Select your major</option>
+              <option value='econ'>ECON</option>
+              <option value='ipol'>IPOL</option>
+              <option value='culp'>CULP</option>
+              <option value='hist'>HIST</option>
+            </select>
+          </label>
+          <label className='radio-group'>
+            <span>Meeting Day</span>
+            <div className='radio-buttons'>
+              <label className='radio'>
+                <input
+                  type='radio'
+                  name='meetingDay'
+                  value='sunday'
+                  checked={signup.meetingDay === 'sunday'}
+                  onChange={handleChange}
+                  className='form-check-input'
+                />
+                <span>Sunday</span>
+              </label>
+              <label className='radio'>
+                <input
+                  type='radio'
+                  name='meetingDay'
+                  value='wednesday'
+                  checked={signup.meetingDay === 'wednesday'}
+                  onChange={handleChange}
+                  className='form-check-input'
+                />
+                <span>Wednesday</span>
+              </label>
+            </div>
+          </label>
+        </div>
         <div className='form-submit'>
-          <button>Signup</button>
+          <button className={`${isPending && 'button-loading'}`}>
+            <span className='button-text'>Signup</span>
+          </button>
           {error && <span className='error'>{error}</span>}
         </div>
       </form>

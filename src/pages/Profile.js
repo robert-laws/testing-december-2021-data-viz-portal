@@ -15,6 +15,7 @@ export const Profile = () => {
           {user && <p>Email: {user.email}</p>}
           <p>Class: {profile.studentClass}</p>
           <p>Major: {profile.major}</p>
+          <p>Meeting Day: {profile.meetingDay}</p>
         </>
       ) : (
         <>
