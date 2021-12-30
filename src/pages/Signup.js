@@ -1,8 +1,11 @@
 import { useState, useRef } from 'react';
+import { useSignup } from '../hooks/useSignup';
 
 export const Signup = () => {
   const formRef = useRef(null);
-  const [error, setError] = useState('');
+
+  const [signupUser, error] = useSignup();
+
   const [signup, setSignup] = useState({
     email: '',
     password: '',
@@ -19,8 +22,9 @@ export const Signup = () => {
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    console.log(signup);
-    setError('please remember to enter a value for email and password');
+
+    signupUser(signup.email, signup.password);
+
     formRef.current.reset();
   };
 
@@ -90,7 +94,7 @@ export const Signup = () => {
         </label>
         <div className='form-submit'>
           <button>Signup</button>
-          <span className='error'>{error}</span>
+          {error && <span className='error'>{error}</span>}
         </div>
       </form>
     </div>
