@@ -1,7 +1,16 @@
 import { useEffect } from 'react';
 import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
 import { Header, PrivateRoute } from './components';
-import { Home, Login, Signup, Profile, KnowledgeBase, NotFound } from './pages';
+import {
+  Home,
+  Login,
+  Signup,
+  Profile,
+  Quiz,
+  Poll,
+  KnowledgeBase,
+  NotFound,
+} from './pages';
 import { useAuthContext } from './hooks/useAuthContext';
 import { useUserContext } from './hooks/useUserContext';
 
@@ -43,6 +52,8 @@ function App() {
               }
             />
             <Route path='/profile' element={<Profile />} />
+            <Route path='/quiz' element={<Quiz />} />
+            <Route path='/poll' element={<Poll />} />
             <Route path='/knowledge-base' element={<KnowledgeBase />} />
             <Route path='*' element={<NotFound />} />
           </Routes>

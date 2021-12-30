@@ -1,21 +1,7 @@
-import { useEffect } from 'react';
-import { useNavigate } from 'react-router-dom';
-import { useAuthContext } from '../hooks/useAuthContext';
-import { useUserContext } from '../hooks/useUserContext';
+import { useCheckUser } from '../hooks/useCheckUser';
 
 export const Profile = () => {
-  const { user } = useAuthContext();
-  const { profile, loadProfile } = useUserContext();
-
-  const navigate = useNavigate();
-
-  useEffect(() => {
-    if (user && !profile) {
-      loadProfile(user.uid);
-    } else if (!user) {
-      navigate('/');
-    }
-  }, [user, profile, loadProfile, navigate]);
+  const { user, profile } = useCheckUser();
 
   return (
     <div>
