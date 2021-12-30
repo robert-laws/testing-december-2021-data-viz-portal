@@ -2,8 +2,8 @@
 
 header {
   width: 100%;
-  border-bottom: 1px solid lighten(a.$gray-color, 10%);
-  background-color: lighten(a.$gray-color, 16%);
+  border-bottom: 1px solid lighten(a.$light-gray-color, 10%);
+  background-color: lighten(a.$light-gray-color, 16%);
 
   .app-header {
     max-width: 1200px;

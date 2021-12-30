@@ -13,7 +13,9 @@ h6,
 p,
 ol,
 ul,
-a {
+a,
+label,
+span {
   font-family: a.$sans-font;
   font-size: a.$font-size-normal-text;
 }

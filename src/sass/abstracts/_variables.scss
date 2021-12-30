@@ -7,7 +7,9 @@ $success-color: #00ff00;
 
 $white-color: #fff;
 $black-color: #000;
-$gray-color: #ccc;
+$light-gray-color: #ccc;
+$gray-color: #777;
+$dark-gray-color: #333;
 
 // typography
 $sans-font: 'Poppins', sans-serif;
@@ -19,3 +21,6 @@ $font-size-normal-text: $font-size-base * 1.65;
 
 // sizing
 $base-border-radius: 4px;
+
+// box-shadow
+$base-box-shadow: 3px 3px 5px rgba(0, 0, 0, 0.05);

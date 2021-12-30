@@ -1,0 +1,54 @@
+@use '../abstracts' as a;
+
+.app-form {
+  max-width: 540px;
+  margin: 5rem auto;
+  padding: 4rem;
+  border: 1px solid a.$light-gray-color;
+  border-radius: a.$base-border-radius;
+  box-shadow: a.$base-box-shadow;
+  background: a.$white-color;
+
+  h2 {
+    font-family: a.$sans-font;
+    font-size: a.$font-size-normal-text * 1.25;
+    font-weight: bold;
+  }
+
+  label {
+    display: block;
+    margin: 2.4rem auto;
+
+    span {
+      display: block;
+      margin-bottom: 6px;
+    }
+  }
+
+  input,
+  textarea,
+  select,
+  option {
+    padding: 8px 6px;
+    font-size: 1em;
+    color: a.$gray-color;
+    width: 100%;
+    box-sizing: border-box;
+    border: 1px solid a.$light-gray-color;
+    border-radius: a.$base-border-radius;
+  }
+
+  select,
+  option {
+    font-size: 16.5px;
+  }
+
+  textarea {
+    min-height: 16rem;
+  }
+  .error {
+    color: a.$error-color;
+  }
+
+  @include a.button(a.$primary-color);
+}
