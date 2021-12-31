@@ -5,7 +5,7 @@ export const Profile = () => {
 
   return (
     <div>
-      <h1>User Profile</h1>
+      <h1>Your Profile</h1>
       {profile ? (
         <>
           <hr />
