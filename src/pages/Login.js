@@ -20,6 +20,7 @@ export const Login = () => {
           <label>
             <span>email</span>
             <input
+              required
               type='email'
               name='email'
               value={email}
@@ -31,6 +32,7 @@ export const Login = () => {
           <label>
             <span>password</span>
             <input
+              required
               type='password'
               name='password'
               value={password}

@@ -1,5 +1,20 @@
 import { useState, useRef } from 'react';
 import { useSignup } from '../hooks/useSignup';
+import Select from 'react-select';
+
+const studentClasses = [
+  { value: 'first-year', label: 'First Year' },
+  { value: 'sophomore', label: 'Sophomore' },
+  { value: 'junior', label: 'Junior' },
+  { value: 'senior', label: 'Senior' },
+];
+
+const majors = [
+  { value: 'ipol', label: 'IPOL' },
+  { value: 'culp', label: 'CULP' },
+  { value: 'econ', label: 'ECON' },
+  { value: 'hist', label: 'HIST' },
+];
 
 export const Signup = () => {
   const formRef = useRef(null);
@@ -15,6 +30,7 @@ export const Signup = () => {
     major: '',
     meetingDay: '',
   });
+  const [formError, setFormError] = useState(null);
 
   const handleChange = (e) => {
     const { name, value } = e.target;
@@ -23,6 +39,22 @@ export const Signup = () => {
 
   const handleSubmit = (e) => {
     e.preventDefault();
+    setFormError(null);
+
+    if (!signup.studentClass) {
+      setFormError('Please select a class');
+      return;
+    }
+
+    if (!signup.major) {
+      setFormError('Please select a major');
+      return;
+    }
+
+    if (!signup.meetingDay) {
+      setFormError('Please select a meeting day');
+      return;
+    }
 
     signupUser(signup);
 
@@ -37,6 +69,7 @@ export const Signup = () => {
           <label>
             <span>email</span>
             <input
+              required
               type='email'
               name='email'
               value={signup.email}
@@ -48,6 +81,7 @@ export const Signup = () => {
           <label>
             <span>password</span>
             <input
+              required
               type='password'
               name='password'
               value={signup.password}
@@ -59,6 +93,7 @@ export const Signup = () => {
           <label>
             <span>first name</span>
             <input
+              required
               type='text'
               name='firstName'
               value={signup.firstName}
@@ -68,6 +103,7 @@ export const Signup = () => {
           <label>
             <span>last name</span>
             <input
+              required
               type='text'
               name='lastName'
               value={signup.lastName}
@@ -78,30 +114,24 @@ export const Signup = () => {
         <div className='fields'>
           <label>
             <span>class</span>
-            <select
-              value={signup.studentClass}
-              name='studentClass'
-              onChange={handleChange}
-            >
-              <option value='0'>Select your class</option>
-              <option value='first-year'>first year</option>
-              <option value='sophomore'>sophomore</option>
-              <option value='junior'>junior</option>
-              <option value='senior'>senior</option>
-            </select>
+            <Select
+              options={studentClasses}
+              onChange={(option) =>
+                setSignup({ ...signup, studentClass: option.value })
+              }
+            />
           </label>
           <label>
             <span>major</span>
-            <select value={signup.major} name='major' onChange={handleChange}>
-              <option value='0'>Select your major</option>
-              <option value='econ'>ECON</option>
-              <option value='ipol'>IPOL</option>
-              <option value='culp'>CULP</option>
-              <option value='hist'>HIST</option>
-            </select>
+            <Select
+              options={majors}
+              onChange={(option) =>
+                setSignup({ ...signup, major: option.value })
+              }
+            />
           </label>
           <label className='radio-group'>
-            <span>Meeting Day</span>
+            <span>class meeting day</span>
             <div className='radio-buttons'>
               <label className='radio'>
                 <input
@@ -132,6 +162,7 @@ export const Signup = () => {
           <button className={`${isPending && 'button-loading'}`}>
             <span className='button-text'>Signup</span>
           </button>
+          {formError && <span className='error-text'>{formError}</span>}
           {error && <span className='error-text'>{error}</span>}
         </div>
       </form>
