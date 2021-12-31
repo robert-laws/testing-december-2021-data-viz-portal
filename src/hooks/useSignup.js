@@ -16,17 +16,19 @@ export const useSignup = () => {
   const auth = getAuth();
   const db = getFirestore();
 
-  const signupUser = async (
-    email,
-    password,
-    firstName,
-    lastName,
-    studentClass,
-    major,
-    meetingDay
-  ) => {
+  const signupUser = async (signupObject) => {
     setError(null);
     setIsPending(true);
+
+    const {
+      email,
+      password,
+      firstName,
+      lastName,
+      studentClass,
+      major,
+      meetingDay,
+    } = signupObject;
 
     try {
       const credential = await createUserWithEmailAndPassword(

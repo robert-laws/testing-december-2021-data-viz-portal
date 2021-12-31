@@ -24,15 +24,7 @@ export const Signup = () => {
   const handleSubmit = (e) => {
     e.preventDefault();
 
-    signupUser(
-      signup.email,
-      signup.password,
-      signup.firstName,
-      signup.lastName,
-      signup.studentClass,
-      signup.major,
-      signup.meetingDay
-    );
+    signupUser(signup);
 
     formRef.current.reset();
   };
@@ -140,7 +132,7 @@ export const Signup = () => {
           <button className={`${isPending && 'button-loading'}`}>
             <span className='button-text'>Signup</span>
           </button>
-          {error && <span className='error'>{error}</span>}
+          {error && <span className='error-text'>{error}</span>}
         </div>
       </form>
     </div>

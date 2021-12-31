@@ -42,7 +42,7 @@ export const Login = () => {
           <button className={`${isPending && 'button-loading'}`}>
             <span className='button-text'>Login</span>
           </button>
-          {error && <span className='error'>{error}</span>}
+          {error && <span className='error-text'>{error}</span>}
         </div>
       </form>
     </div>

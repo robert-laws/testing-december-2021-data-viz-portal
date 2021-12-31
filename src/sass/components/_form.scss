@@ -122,6 +122,15 @@
     min-height: 16rem;
   }
 
+  .error {
+    color: a.$error-color;
+    background: a.$light-error-color;
+    border: 1px solid a.$error-color;
+    border-radius: a.$base-border-radius;
+    padding: 8px;
+    margin: 1rem 0;
+  }
+
   .form-submit {
     margin-top: 1rem;
     min-height: 7rem;
@@ -131,7 +140,7 @@
 
     @include a.button(a.$primary-color);
 
-    .error {
+    .error-text {
       color: a.$error-color;
     }
   }
