@@ -130,48 +130,6 @@
     gap: 2rem;
 
     @include a.button(a.$primary-color);
-    button {
-      position: relative;
-    }
-
-    .button-text {
-      transition: all 0.2s;
-    }
-
-    .button-loading {
-      background-color: a.$primary-color;
-    }
-
-    .button-loading .button-text {
-      visibility: hidden;
-      opacity: 0;
-    }
-
-    .button-loading::after {
-      content: '';
-      position: absolute;
-      width: 25px;
-      height: 25px;
-      top: 0;
-      left: 0;
-      right: 0;
-      bottom: 0;
-      margin: auto;
-      border: 4px solid transparent;
-      border-top-color: a.$white-color;
-      border-radius: 50%;
-      animation: button-loading-spinner 0.65s linear infinite;
-    }
-
-    @keyframes button-loading-spinner {
-      from {
-        transform: rotate(0turn);
-      }
-
-      to {
-        transform: rotate(1turn);
-      }
-    }
 
     .error {
       color: a.$error-color;

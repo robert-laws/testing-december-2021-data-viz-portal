@@ -34,6 +34,7 @@
 
 @mixin button($button-color: v.$secondary-color) {
   button {
+    position: relative;
     border-color: $button-color;
     background-color: v.$white-color;
     color: $button-color;
@@ -41,14 +42,53 @@
     border-style: solid;
     border-radius: v.$base-border-radius;
     cursor: pointer;
-    font-size: 1.6rem;
-    font-weight: bold;
-    padding: 1rem 2rem;
+    font-size: v.$font-size-normal-text;
+    font-weight: normal;
+    padding: 0.6rem 2rem;
     transition: all 0.1s ease;
 
     &:hover {
       background-color: $button-color;
       color: v.$white-color;
+    }
+  }
+
+  .button-text {
+    transition: all 0.2s;
+  }
+
+  .button-loading {
+    background-color: v.$primary-color;
+  }
+
+  .button-loading .button-text {
+    visibility: hidden;
+    opacity: 0;
+  }
+
+  .button-loading::after {
+    content: '';
+    position: absolute;
+    width: 25px;
+    height: 25px;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    margin: auto;
+    border: 4px solid transparent;
+    border-top-color: v.$white-color;
+    border-radius: 50%;
+    animation: button-loading-spinner 0.65s linear infinite;
+  }
+
+  @keyframes button-loading-spinner {
+    from {
+      transform: rotate(0turn);
+    }
+
+    to {
+      transform: rotate(1turn);
     }
   }
 }

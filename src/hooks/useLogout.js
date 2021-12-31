@@ -5,28 +5,28 @@ import { getAuth, signOut } from 'firebase/auth';
 export const useLogout = () => {
   const [isCancelled, setIsCancelled] = useState(false);
   const [error, setError] = useState(null);
-  const [isPending, setIsPending] = useState(false);
+  const [isLogoutPending, setIsLogoutPending] = useState(false);
 
   const auth = getAuth();
   const navigate = useNavigate();
 
   const logout = async () => {
     setError(null);
-    setIsPending(true);
+    setIsLogoutPending(true);
 
     try {
       await signOut(auth);
 
       if (!isCancelled) {
         setError(null);
-        setIsPending(false);
+        setIsLogoutPending(false);
       }
 
       navigate('/');
     } catch (err) {
       if (!isCancelled) {
         setError(err.message);
-        setIsPending(false);
+        setIsLogoutPending(false);
       }
     }
   };
@@ -37,5 +37,5 @@ export const useLogout = () => {
     };
   }, []);
 
-  return [logout, error, isPending];
+  return { logout, error, isLogoutPending };
 };
