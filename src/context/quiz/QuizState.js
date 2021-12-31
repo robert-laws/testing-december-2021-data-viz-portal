@@ -5,8 +5,9 @@ import {
   getDocs,
   query,
   where,
+  orderBy,
 } from 'firebase/firestore';
-import { COLLECTION_ERROR, LOAD_DOCUMENTS } from '../types';
+import { COLLECTION_ERROR, LOAD_DOCUMENTS, CLEAR_DOCUMENTS } from '../types';
 import QuizContext from './quizContext';
 import quizReducer from './quizReducer';
 
@@ -48,6 +49,12 @@ const QuizState = ({ children }) => {
   const loadQuizzes = useCallback(
     async (weekNumber) => {
       const colRef = collection(db, 'quizzes');
+      // const queryRef = query(
+      //   colRef,
+      //   where('weekNumber', '==', weekNumber),
+      //   orderBy('questionNumber', 'asc')
+      // );
+
       const queryRef = query(colRef, where('weekNumber', '==', weekNumber));
 
       try {
@@ -77,6 +84,10 @@ const QuizState = ({ children }) => {
     [dispatch]
   );
 
+  const clearQuizzes = useCallback(() => {
+    dispatch({ type: CLEAR_DOCUMENTS });
+  }, [dispatch]);
+
   return (
     <QuizContext.Provider
       value={{
@@ -84,6 +95,7 @@ const QuizState = ({ children }) => {
         error: state.error,
         isLoading: state.isLoading,
         loadQuizzes,
+        clearQuizzes,
       }}
     >
       {children}

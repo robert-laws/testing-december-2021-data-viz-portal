@@ -1,6 +1,7 @@
 import { useEffect } from 'react';
 import { useCheckUser } from '../hooks/useCheckUser';
 import { useQuizContext } from '../hooks/useQuizContext';
+import { QuizList } from '../components';
 
 export const Profile = () => {
   const { user, profile } = useCheckUser();
@@ -8,7 +9,7 @@ export const Profile = () => {
 
   useEffect(() => {
     if (user) {
-      loadQuizzes('2');
+      loadQuizzes('1');
     }
   }, [user, loadQuizzes]);
 
@@ -32,16 +33,10 @@ export const Profile = () => {
         </>
       )}
       <hr />
-      <h2>Quizzes</h2>
       {isLoading && <p>Loading...</p>}
-      {!error && documents ? (
-        <ul>
-          {documents.map((document) => (
-            <li key={document.id}>{document.questionText}</li>
-          ))}
-        </ul>
-      ) : (
-        <p>{error}</p>
+      {error && <p>{error}</p>}
+      {!error && documents && (
+        <QuizList weekNumber={'1'} questions={documents} />
       )}
     </div>
   );

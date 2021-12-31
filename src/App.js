@@ -13,10 +13,12 @@ import {
 } from './pages';
 import { useAuthContext } from './hooks/useAuthContext';
 import { useUserContext } from './hooks/useUserContext';
+import { useQuizContext } from './hooks/useQuizContext';
 
 function App() {
   const { user, authIsReady } = useAuthContext();
   const { loadProfile, clearProfile } = useUserContext();
+  const { clearQuizzes } = useQuizContext();
 
   console.log(authIsReady, user);
 
@@ -25,8 +27,9 @@ function App() {
       loadProfile(user.uid);
     } else {
       clearProfile();
+      clearQuizzes();
     }
-  }, [user, loadProfile, clearProfile]);
+  }, [user, loadProfile, clearProfile, clearQuizzes]);
 
   return (
     <>
