@@ -82,6 +82,7 @@ export const Signup = () => {
             <span>password</span>
             <input
               required
+              minLength={6}
               type='password'
               name='password'
               value={signup.password}

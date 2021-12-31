@@ -33,6 +33,7 @@ export const Login = () => {
             <span>password</span>
             <input
               required
+              minLength={6}
               type='password'
               name='password'
               value={password}
