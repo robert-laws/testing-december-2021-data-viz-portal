@@ -12,11 +12,13 @@ export const NewProfile = () => {
 
   return (
     <div className='page'>
-      <Sidebar
-        userName={`${profile.firstName} ${profile.lastName}`}
-        currentTab={currentTab}
-        updateCurrentTab={handleUpdateCurrentTab}
-      />
+      {profile && (
+        <Sidebar
+          userName={profile && `${profile.firstName} ${profile.lastName}`}
+          currentTab={currentTab}
+          updateCurrentTab={handleUpdateCurrentTab}
+        />
+      )}
       <Content>
         {currentTab === 'profile' && (
           <Profile email={user.email} profile={profile} />
