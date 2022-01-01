@@ -1,4 +1,4 @@
-export const Profile = ({ email, profile }) => {
+export const Profile = ({ user, profile }) => {
   return (
     <div>
       <h2>Your Profile</h2>
@@ -9,7 +9,7 @@ export const Profile = ({ email, profile }) => {
               {profile.firstName} {profile.lastName}
             </strong>
           </p>
-          {email && <p>Email: {email}</p>}
+          {user && <p>Email: {user.email}</p>}
           <p>Class: {profile.studentClass}</p>
           <p>Major: {profile.major}</p>
           <p>Class Meeting Day: {profile.meetingDay}</p>

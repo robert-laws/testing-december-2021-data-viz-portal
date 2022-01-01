@@ -20,7 +20,14 @@
       font-size: a.$font-size-normal-text * 1.1;
     }
 
-    @include a.button();
+    .completed {
+      @include a.button(a.$primary-color);
+    }
+
+    .available {
+      @include a.button();
+    }
+
     button {
       margin: 1.2rem 0;
     }

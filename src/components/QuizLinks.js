@@ -1,37 +1,52 @@
-export const QuizLinks = ({ userResults }) => {
-  const groupResults = (arrayOfObjects, property) => {
-    return arrayOfObjects.reduce((acc, obj) => {
-      let key = obj[property];
-      if (!acc[key]) {
-        acc[key] = [];
-      }
-      acc[key].push(obj);
-      return acc;
-    }, {});
+export const QuizLinks = ({ quizStatusList, limitToAvailable = false }) => {
+  const cardContent = (quizStatus) => {
+    let output = '';
+    if (quizStatus === 'completed') {
+      output = (
+        <div className='completed'>
+          <button>View Results</button>
+        </div>
+      );
+    } else if (quizStatus === 'available') {
+      output = (
+        <div className='available'>
+          <button>Take Quiz</button>
+        </div>
+      );
+    } else if (quizStatus === 'upcoming') {
+      output = (
+        <p>
+          <strong>Upcoming</strong>
+        </p>
+      );
+    }
+    return output;
   };
 
-  const weeks = 5;
-  const quizResults = groupResults(userResults, 'weekNumber');
-  const quizLinks = [];
-
-  for (let i = 1; i <= weeks; i++) {
-    if (Object.keys(quizResults).includes(i.toString())) {
-      quizLinks.push({ week: i, complete: true });
-    } else {
-      quizLinks.push({ week: i, complete: false });
-    }
-  }
-
   return (
-    <div className='quiz-list'>
-      {quizLinks.map(({ week, complete }) => {
-        return (
-          <div className='quiz-list-card' key={week}>
-            <h3>Week {week}</h3>
-            {complete ? <p>View Results</p> : <button>Take Quiz</button>}
-          </div>
-        );
-      })}
-    </div>
+    <>
+      <h1>Quiz List</h1>
+      <div className='quiz-list'>
+        {quizStatusList.map(({ weekNumber, status }) => {
+          if (status === 'available' && limitToAvailable) {
+            return (
+              <div className='quiz-list-card' key={weekNumber}>
+                <h3>Week {weekNumber}</h3>
+                {cardContent(status)}
+              </div>
+            );
+          } else if (!limitToAvailable) {
+            return (
+              <div className='quiz-list-card' key={weekNumber}>
+                <h3>Week {weekNumber}</h3>
+                {cardContent(status)}
+              </div>
+            );
+          } else {
+            return null;
+          }
+        })}
+      </div>
+    </>
   );
 };
