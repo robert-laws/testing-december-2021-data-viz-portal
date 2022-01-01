@@ -1,5 +1,90 @@
 @use '../abstracts' as a;
 
+.app {
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+
+  header {
+    flex: 0 0 85px;
+  }
+
+  .page {
+    flex: 1;
+
+    display: flex;
+    flex-flow: row wrap;
+
+    aside.left-sidebar {
+      flex: 0 0 350px;
+      background-color: darken(a.$primary-color, 10%);
+
+      .user {
+        color: a.$white-color;
+        height: 200px;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        border-bottom: 1px solid transparentize(a.$light-gray-color, 0.5);
+      }
+
+      .links {
+        padding: 6rem 0 3rem 3rem;
+
+        & > * {
+          margin: 1rem 0;
+        }
+
+        .link {
+          color: a.$white-color;
+          display: flex;
+          justify-content: flex-start;
+          align-items: center;
+          height: 50px;
+          padding-left: 2rem;
+          border: none;
+          border-radius: 30px 0 0 30px;
+          background-color: a.$secondary-color;
+
+          img {
+            width: 30px;
+            height: 30px;
+            margin-right: 5px;
+            filter: invert(100%);
+          }
+
+          &:hover {
+            cursor: pointer;
+            background-color: lighten(a.$secondary-color, 5%);
+          }
+
+          &.active-link {
+            background-color: a.$white-color;
+            color: a.$black-color;
+
+            img {
+              filter: invert(0%);
+            }
+          }
+        }
+      }
+    }
+
+    main.main-content {
+      flex: 1;
+    }
+
+    aside.right-sidebar {
+      flex: 0 0 350px;
+    }
+  }
+
+  footer {
+    flex: 0 0 200px;
+    background-color: #ccc;
+  }
+}
+
 header {
   width: 100%;
   border-bottom: 1px solid lighten(a.$light-gray-color, 10%);
@@ -7,7 +92,6 @@ header {
 
   .app-header {
     max-width: 1200px;
-    min-height: 85px;
     margin: 0 auto;
     display: flex;
     justify-content: space-between;

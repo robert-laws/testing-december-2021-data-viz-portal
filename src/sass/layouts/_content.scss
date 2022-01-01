@@ -1,0 +1,9 @@
+@use '../abstracts' as a;
+
+.main-content {
+  padding: 2rem;
+
+  h2 {
+    font-size: a.$font-size-normal-text * 1.4;
+  }
+}

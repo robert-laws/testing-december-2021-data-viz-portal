@@ -1,11 +1,12 @@
 import { useEffect } from 'react';
 import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
-import { Header, PrivateRoute } from './components';
+import { Header, Footer, PrivateRoute } from './components';
 import {
   Home,
   Login,
   Signup,
   Profile,
+  NewProfile,
   Quiz,
   Poll,
   KnowledgeBase,
@@ -32,7 +33,7 @@ function App() {
   }, [user, loadProfile, clearProfile, clearQuizzes]);
 
   return (
-    <>
+    <div className='app'>
       {authIsReady && (
         <Router>
           <Header />
@@ -55,14 +56,16 @@ function App() {
               }
             />
             <Route path='/profile' element={<Profile />} />
+            <Route path='/new-profile' element={<NewProfile />} />
             <Route path='/quiz' element={<Quiz />} />
             <Route path='/poll' element={<Poll />} />
             <Route path='/knowledge-base' element={<KnowledgeBase />} />
             <Route path='*' element={<NotFound />} />
           </Routes>
+          <Footer />
         </Router>
       )}
-    </>
+    </div>
   );
 }
 
