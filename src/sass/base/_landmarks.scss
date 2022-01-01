@@ -23,9 +23,21 @@
         color: a.$white-color;
         height: 200px;
         display: flex;
+        flex-flow: column wrap;
         justify-content: center;
         align-items: center;
         border-bottom: 1px solid transparentize(a.$light-gray-color, 0.5);
+
+        img {
+          width: 60px;
+          height: 60px;
+          filter: invert(100%);
+        }
+
+        p {
+          font-size: a.$font-size-normal-text * 1.25;
+          font-weight: bold;
+        }
       }
 
       .links {

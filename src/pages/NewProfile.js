@@ -13,6 +13,7 @@ export const NewProfile = () => {
   return (
     <div className='page'>
       <Sidebar
+        userName={`${profile.firstName} ${profile.lastName}`}
         currentTab={currentTab}
         updateCurrentTab={handleUpdateCurrentTab}
       />

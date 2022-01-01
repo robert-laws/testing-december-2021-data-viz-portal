@@ -2,12 +2,14 @@ import DashboardIcon from '../assets/icons/space_dashboard_black_24dp.svg';
 import PollIcon from '../assets/icons/poll_black_24dp.svg';
 import ProfileIcon from '../assets/icons/account_box_black_24dp.svg';
 import QuizIcon from '../assets/icons/quiz_black_24dp.svg';
+import WelcomeUser from '../assets/icons/account_circle_black_24dp.svg';
 
-export const Sidebar = ({ currentTab, updateCurrentTab }) => {
+export const Sidebar = ({ userName, currentTab, updateCurrentTab }) => {
   return (
     <aside className='left-sidebar'>
       <div className='user'>
-        <span>User Name</span>
+        <img src={WelcomeUser} alt='User Icon' />
+        <p>Welcome, {userName}</p>
       </div>
       <nav className='links'>
         <div
