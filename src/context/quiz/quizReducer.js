@@ -1,4 +1,10 @@
-import { COLLECTION_ERROR, LOAD_DOCUMENTS, CLEAR_DOCUMENTS } from '../types';
+import {
+  COLLECTION_ERROR,
+  LOAD_QUESTIONS,
+  LOAD_RESULTS,
+  CLEAR_QUIZZES,
+  CLEAR_RESULTS,
+} from '../types';
 
 const quizReducer = (state, action) => {
   switch (action.type) {
@@ -9,16 +15,34 @@ const quizReducer = (state, action) => {
         isLoading: false,
       };
 
-    case LOAD_DOCUMENTS:
+    case LOAD_QUESTIONS:
       return {
-        documents: action.payload,
+        ...state,
+        questions: action.payload,
         error: null,
         isLoading: false,
       };
 
-    case CLEAR_DOCUMENTS:
+    case CLEAR_QUIZZES:
       return {
+        ...state,
         documents: [],
+        error: null,
+        isLoading: true,
+      };
+
+    case LOAD_RESULTS:
+      return {
+        ...state,
+        results: action.payload,
+        error: null,
+        isLoading: false,
+      };
+
+    case CLEAR_RESULTS:
+      return {
+        ...state,
+        results: [],
         error: null,
         isLoading: true,
       };

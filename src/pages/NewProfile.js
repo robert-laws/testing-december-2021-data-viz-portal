@@ -1,6 +1,6 @@
 import { useState } from 'react';
 import { useCheckUser } from '../hooks/useCheckUser';
-import { Sidebar, Content, Aside, Profile, Quizzes } from '../components';
+import { Sidebar, Content, Aside, Profile, QuizDashboard } from '../components';
 
 export const NewProfile = () => {
   const { user, profile } = useCheckUser();
@@ -24,7 +24,7 @@ export const NewProfile = () => {
           <Profile email={user.email} profile={profile} />
         )}
         {currentTab === 'polls' && <h2>Polls</h2>}
-        {currentTab === 'quizzes' && <Quizzes user={user} />}
+        {currentTab === 'quizzes' && <QuizDashboard user={user} />}
         {currentTab === 'dashboard' && <h2>Dashboard</h2>}
       </Content>
       <Aside />

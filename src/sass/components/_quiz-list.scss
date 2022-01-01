@@ -1,0 +1,28 @@
+@use '../abstracts' as a;
+
+.quiz-list {
+  padding: 2rem 0;
+  display: flex;
+  flex-flow: row wrap;
+  align-items: flex-start;
+  justify-content: flex-start;
+  gap: 2rem;
+
+  .quiz-list-card {
+    width: 300px;
+    padding: 1.5rem 2rem 0.5rem;
+    border: 1px solid a.$light-gray-color;
+    border-radius: a.$base-border-radius;
+    background-color: lighten(a.$light-gray-color, 17%);
+    box-shadow: a.$base-box-shadow;
+
+    h3 {
+      font-size: a.$font-size-normal-text * 1.1;
+    }
+
+    @include a.button();
+    button {
+      margin: 1.2rem 0;
+    }
+  }
+}

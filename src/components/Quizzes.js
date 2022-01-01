@@ -3,7 +3,8 @@ import { useQuizContext } from '../hooks/useQuizContext';
 import { QuizList } from './QuizList';
 
 export const Quizzes = ({ user }) => {
-  const { documents, error, isLoading, loadQuizzes } = useQuizContext();
+  const { questions, results, error, isLoading, loadQuizzes } =
+    useQuizContext();
 
   useEffect(() => {
     if (user) {
@@ -14,8 +15,8 @@ export const Quizzes = ({ user }) => {
   return (
     <div>
       {error && <p>{error}</p>}
-      {!error && documents && (
-        <QuizList weekNumber={'1'} questions={documents} />
+      {!error && questions && (
+        <QuizList weekNumber={'1'} questions={questions} />
       )}
       {isLoading && <p>Loading...</p>}
     </div>
