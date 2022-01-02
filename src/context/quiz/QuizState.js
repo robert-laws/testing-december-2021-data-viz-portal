@@ -57,7 +57,7 @@ const QuizState = ({ children }) => {
 
   const loadQuizzes = useCallback(
     async (weekNumber) => {
-      const colRef = collection(db, 'quiz-results');
+      const colRef = collection(db, 'quizzes');
       // const queryRef = query(
       //   colRef,
       //   where('weekNumber', '==', weekNumber),

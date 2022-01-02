@@ -4,11 +4,19 @@ import { useQuizContext } from '../hooks/useQuizContext';
 import { Sidebar, Content, Aside, Profile, QuizLinks } from '../components';
 
 const quizSchedule = [
-  { weekNumber: '1', openDate: '2021-12-1' },
-  { weekNumber: '2', openDate: '2021-12-8' },
-  { weekNumber: '3', openDate: '2021-12-15' },
-  { weekNumber: '4', openDate: '2022-1-22' },
-  { weekNumber: '5', openDate: '2022-1-29' },
+  {
+    weekNumber: '1',
+    topic: 'Basics of Data Visualization',
+    openDate: '2021-12-02T00:00:00.00',
+  },
+  { weekNumber: '2', topic: 'Datasets', openDate: '2021-12-08T00:00:00.00' },
+  { weekNumber: '3', topic: 'Time Series', openDate: '2021-12-15T00:00:00.00' },
+  { weekNumber: '4', topic: 'Geo-data', openDate: '2022-01-22T00:00:00.00' },
+  {
+    weekNumber: '5',
+    topic: 'Dashboards and Stories',
+    openDate: '2022-01-29T00:00:00.00',
+  },
 ];
 
 const dateToday = new Date();
@@ -41,26 +49,34 @@ const listCompletedQuizzes = (userQuizzes) => {
 
 const findAvailableQuiz = (schedule, userQuizzes) => {
   let available = [];
+
   userQuizzes.forEach((quiz) => {
     if (!quiz.complete) {
       const matchWeek = quiz.week;
+
       schedule.forEach((week) => {
         if (week.weekNumber === matchWeek.toString()) {
           if (dateToday > new Date(week.openDate)) {
             available.push({
               weekNumber: week.weekNumber,
+              topic: week.topic,
               status: 'available',
             });
           } else {
             available.push({
               weekNumber: week.weekNumber,
+              topic: week.topic,
               status: 'upcoming',
             });
           }
         }
       });
     } else {
-      available.push({ weekNumber: quiz.week.toString(), status: 'completed' });
+      available.push({
+        weekNumber: quiz.week.toString(),
+        topic: quiz.week.topic,
+        status: 'completed',
+      });
     }
   });
 
@@ -95,6 +111,7 @@ export const NewProfile = () => {
         { week: 5, complete: false },
       ];
       const availableQuiz = findAvailableQuiz(quizSchedule, completedList);
+      // console.log(availableQuiz);
       setQuizStatusList(availableQuiz);
     }
   }, [user, results]);

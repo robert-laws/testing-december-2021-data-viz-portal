@@ -1,16 +1,22 @@
+import { Link } from 'react-router-dom';
+
 export const QuizLinks = ({ quizStatusList, limitToAvailable = false }) => {
-  const cardContent = (quizStatus) => {
+  const cardContent = (quizStatus, weekNumber) => {
     let output = '';
     if (quizStatus === 'completed') {
       output = (
         <div className='completed'>
-          <button>View Results</button>
+          <Link className='link-button' to={`/quiz/${weekNumber}`}>
+            View Results
+          </Link>
         </div>
       );
     } else if (quizStatus === 'available') {
       output = (
         <div className='available'>
-          <button>Take Quiz</button>
+          <Link className='link-button' to={`/quiz/${weekNumber}`}>
+            Take Quiz
+          </Link>
         </div>
       );
     } else if (quizStatus === 'upcoming') {
@@ -27,19 +33,21 @@ export const QuizLinks = ({ quizStatusList, limitToAvailable = false }) => {
     <>
       <h1>Quiz List</h1>
       <div className='quiz-list'>
-        {quizStatusList.map(({ weekNumber, status }) => {
+        {quizStatusList.map(({ weekNumber, topic, status }) => {
           if (status === 'available' && limitToAvailable) {
             return (
               <div className='quiz-list-card' key={weekNumber}>
                 <h3>Week {weekNumber}</h3>
-                {cardContent(status)}
+                <p>{topic}</p>
+                {cardContent(status, weekNumber)}
               </div>
             );
           } else if (!limitToAvailable) {
             return (
               <div className='quiz-list-card' key={weekNumber}>
                 <h3>Week {weekNumber}</h3>
-                {cardContent(status)}
+                <p>{topic}</p>
+                {cardContent(status, weekNumber)}
               </div>
             );
           } else {

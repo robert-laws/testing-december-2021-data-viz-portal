@@ -1,15 +1,15 @@
 import { QuizQuestion } from './QuizQuestion';
 
-export const QuizList = ({ weekNumber, questions }) => {
+export const QuizList = ({ questions }) => {
   return (
     <div>
-      <h2>Quiz for Week {weekNumber}</h2>
       <section>
-        {questions.map((question, index) => (
-          <div key={question.id}>
-            <QuizQuestion question={question} number={index} />
-          </div>
-        ))}
+        {questions.length > 0 &&
+          questions.map((question, index) => (
+            <div key={question.id}>
+              <QuizQuestion question={question} number={index} />
+            </div>
+          ))}
       </section>
     </div>
   );

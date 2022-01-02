@@ -58,6 +58,7 @@ function App() {
             <Route path='/profile' element={<Profile />} />
             <Route path='/new-profile' element={<NewProfile />} />
             <Route path='/quiz' element={<Quiz />} />
+            <Route path='/quiz/:weekNumber' element={<Quiz />} />
             <Route path='/poll' element={<Poll />} />
             <Route path='/knowledge-base' element={<KnowledgeBase />} />
             <Route path='*' element={<NotFound />} />

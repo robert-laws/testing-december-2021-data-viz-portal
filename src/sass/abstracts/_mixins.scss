@@ -32,6 +32,29 @@
   }
 }
 
+@mixin link-button($button-color: v.$secondary-color) {
+  a {
+    display: inline-block;
+    text-decoration: none;
+    border-color: $button-color;
+    background-color: v.$white-color;
+    color: $button-color;
+    border-width: 2px;
+    border-style: solid;
+    border-radius: v.$base-border-radius;
+    cursor: pointer;
+    font-size: v.$font-size-normal-text;
+    font-weight: normal;
+    padding: 0.6rem 2rem;
+    transition: all 0.1s ease;
+
+    &:hover {
+      background-color: $button-color;
+      color: v.$white-color;
+    }
+  }
+}
+
 @mixin button($button-color: v.$secondary-color) {
   button {
     position: relative;

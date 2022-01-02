@@ -28,8 +28,10 @@
       @include a.button();
     }
 
-    button {
-      margin: 1.2rem 0;
+    @include a.link-button(a.$primary-color);
+
+    .link-button {
+      margin: 0 0 1.2rem 0;
     }
   }
 }
