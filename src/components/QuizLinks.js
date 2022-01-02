@@ -1,29 +1,38 @@
 import { Link } from 'react-router-dom';
 
 export const QuizLinks = ({ quizStatusList, limitToAvailable = false }) => {
-  const cardContent = (quizStatus, weekNumber) => {
+  const cardContent = (quizStatus, weekNumber, topic) => {
     let output = '';
     if (quizStatus === 'completed') {
       output = (
-        <div className='completed'>
-          <Link className='link-button' to={`/quiz/${weekNumber}`}>
-            View Results
-          </Link>
-        </div>
+        <>
+          <p>{topic}</p>
+          <div className='completed'>
+            <Link className='link-button' to={`/quiz-result/${weekNumber}`}>
+              View Results
+            </Link>
+          </div>
+        </>
       );
     } else if (quizStatus === 'available') {
       output = (
-        <div className='available'>
-          <Link className='link-button' to={`/quiz/${weekNumber}`}>
-            Take Quiz
-          </Link>
-        </div>
+        <>
+          <p>{topic}</p>
+          <div className='available'>
+            <Link className='link-button' to={`/quiz/${weekNumber}`}>
+              Take Quiz
+            </Link>
+          </div>
+        </>
       );
     } else if (quizStatus === 'upcoming') {
       output = (
-        <p>
-          <strong>Upcoming</strong>
-        </p>
+        <>
+          <p>{topic}</p>
+          <p>
+            <strong>Upcoming</strong>
+          </p>
+        </>
       );
     }
     return output;
@@ -38,16 +47,14 @@ export const QuizLinks = ({ quizStatusList, limitToAvailable = false }) => {
             return (
               <div className='quiz-list-card' key={weekNumber}>
                 <h3>Week {weekNumber}</h3>
-                <p>{topic}</p>
-                {cardContent(status, weekNumber)}
+                {cardContent(status, weekNumber, topic)}
               </div>
             );
           } else if (!limitToAvailable) {
             return (
               <div className='quiz-list-card' key={weekNumber}>
                 <h3>Week {weekNumber}</h3>
-                <p>{topic}</p>
-                {cardContent(status, weekNumber)}
+                {cardContent(status, weekNumber, topic)}
               </div>
             );
           } else {

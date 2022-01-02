@@ -5,6 +5,7 @@ import {
   getDocs,
   doc,
   getDoc,
+  addDoc,
   query,
   where,
   orderBy,
@@ -15,6 +16,7 @@ import {
   CLEAR_QUIZZES,
   LOAD_RESULTS,
   CLEAR_RESULTS,
+  SAVING_COMPLETE,
 } from '../types';
 import QuizContext from './quizContext';
 import quizReducer from './quizReducer';
@@ -27,6 +29,7 @@ const QuizState = ({ children }) => {
     results: [],
     error: null,
     isLoading: true,
+    isSaving: true,
   };
 
   const [state, dispatch] = useReducer(quizReducer, initialState);
@@ -134,6 +137,25 @@ const QuizState = ({ children }) => {
     dispatch({ type: CLEAR_RESULTS });
   }, [dispatch]);
 
+  const saveQuizResults = useCallback(
+    async (answers) => {
+      const colRef = collection(db, 'quiz-results');
+
+      try {
+        for (let i = 0; i < answers.length; i++) {
+          await addDoc(colRef, answers[i]);
+        }
+        dispatch({ type: SAVING_COMPLETE });
+      } catch (error) {
+        dispatch({
+          type: COLLECTION_ERROR,
+          payload: `Could not add the documents because: ${error.message}`,
+        });
+      }
+    },
+    [dispatch]
+  );
+
   return (
     <QuizContext.Provider
       value={{
@@ -141,9 +163,11 @@ const QuizState = ({ children }) => {
         results: state.results,
         error: state.error,
         isLoading: state.isLoading,
+        isSaving: state.isSaving,
         loadQuizzes,
         clearQuizzes,
         loadResultsForUser,
+        saveQuizResults,
         clearResults,
       }}
     >

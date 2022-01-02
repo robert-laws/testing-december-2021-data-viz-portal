@@ -4,6 +4,7 @@ import {
   LOAD_RESULTS,
   CLEAR_QUIZZES,
   CLEAR_RESULTS,
+  SAVING_COMPLETE,
 } from '../types';
 
 const quizReducer = (state, action) => {
@@ -29,6 +30,7 @@ const quizReducer = (state, action) => {
         documents: [],
         error: null,
         isLoading: true,
+        isSaving: true,
       };
 
     case LOAD_RESULTS:
@@ -45,6 +47,13 @@ const quizReducer = (state, action) => {
         results: [],
         error: null,
         isLoading: true,
+        isSaving: true,
+      };
+
+    case SAVING_COMPLETE:
+      return {
+        ...state,
+        isSaving: false,
       };
 
     default:

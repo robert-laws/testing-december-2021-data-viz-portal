@@ -74,11 +74,15 @@ const findAvailableQuiz = (schedule, userQuizzes) => {
     } else {
       available.push({
         weekNumber: quiz.week.toString(),
-        topic: quiz.week.topic,
+        topic: quizSchedule.find(
+          (week) => week.weekNumber === quiz.week.toString()
+        ).topic,
         status: 'completed',
       });
     }
   });
+
+  console.log(available);
 
   return available;
 };

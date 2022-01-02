@@ -1,4 +1,19 @@
-export const QuizQuestion = ({ question, number }) => {
+import { useState, useEffect } from 'react';
+
+export const QuizQuestion = ({ question, number, updateAnswers }) => {
+  const [answer, setAnswer] = useState({
+    questionNumber: '',
+    weekNumber: '',
+    answer: '',
+    correct: false,
+  });
+
+  useEffect(() => {
+    if (answer.answer !== '') {
+      updateAnswers(answer);
+    }
+  }, [answer, updateAnswers]);
+
   const qNumber = number + 1;
   return (
     <div className='app-form'>
@@ -15,6 +30,15 @@ export const QuizQuestion = ({ question, number }) => {
                 name={`question${qNumber}`}
                 value={choice}
                 className='form-check-input'
+                onChange={() =>
+                  setAnswer({
+                    ...answer,
+                    weekNumber: question.weekNumber,
+                    questionNumber: question.questionNumber,
+                    answer: choice,
+                    correct: question.correctAnswer === choice,
+                  })
+                }
               />
               <span>{choice}</span>
             </label>

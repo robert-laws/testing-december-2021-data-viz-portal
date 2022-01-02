@@ -14,7 +14,7 @@ export const Quizzes = ({ user, weekNumber }) => {
   return (
     <div>
       {error && <p>{error}</p>}
-      {!error && questions && <QuizList questions={questions} />}
+      {!error && questions && <QuizList questions={questions} user={user} />}
       {isLoading && <p>Loading...</p>}
     </div>
   );

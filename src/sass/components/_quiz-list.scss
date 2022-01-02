@@ -22,10 +22,12 @@
 
     .completed {
       @include a.button(a.$primary-color);
+      @include a.link-button(a.$primary-color);
     }
 
     .available {
-      @include a.button();
+      @include a.button(a.$secondary-color);
+      @include a.link-button(a.$secondary-color);
     }
 
     @include a.link-button(a.$primary-color);
