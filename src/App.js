@@ -21,7 +21,7 @@ function App() {
   const { loadProfile, clearProfile } = useUserContext();
   const { clearQuizzes } = useQuizContext();
 
-  console.log(authIsReady, user);
+  // console.log(authIsReady, user);
 
   useEffect(() => {
     if (user !== null) {

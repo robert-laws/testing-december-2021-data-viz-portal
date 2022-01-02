@@ -11,3 +11,6 @@ export { Content } from './Content';
 export { Profile } from './Profile';
 export { Sidebar } from './Sidebar';
 export { Aside } from './Aside';
+
+// charts
+export { ColumnChart } from './ColumnChart';

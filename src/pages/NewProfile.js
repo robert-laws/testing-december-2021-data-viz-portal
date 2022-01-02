@@ -1,7 +1,14 @@
 import { useState, useEffect } from 'react';
 import { useCheckUser } from '../hooks/useCheckUser';
 import { useQuizContext } from '../hooks/useQuizContext';
-import { Sidebar, Content, Aside, Profile, QuizLinks } from '../components';
+import {
+  Sidebar,
+  Content,
+  Aside,
+  Profile,
+  QuizLinks,
+  ColumnChart,
+} from '../components';
 
 const quizSchedule = [
   {
@@ -18,6 +25,25 @@ const quizSchedule = [
     openDate: '2022-01-29T00:00:00.00',
   },
 ];
+
+const prepareUserQuizzesForVisualization = (category, measure, userQuizzes) => {
+  const quizResults = [[category, measure, { role: 'annotation' }]];
+  const weeks = 5;
+
+  for (let i = 1; i <= weeks; i++) {
+    if (Object.keys(userQuizzes).includes(i.toString())) {
+      let correct = 0;
+      userQuizzes[i].forEach((question) => {
+        if (question.correct) {
+          correct++;
+        }
+      });
+      quizResults.push([i.toString(), correct, correct]);
+    }
+  }
+
+  return quizResults;
+};
 
 const dateToday = new Date();
 
@@ -82,8 +108,6 @@ const findAvailableQuiz = (schedule, userQuizzes) => {
     }
   });
 
-  console.log(available);
-
   return available;
 };
 
@@ -91,6 +115,7 @@ export const NewProfile = () => {
   const { user, profile } = useCheckUser();
   const [currentTab, setCurrentTab] = useState('profile');
   const [quizStatusList, setQuizStatusList] = useState([]);
+  const [chartData, setChartData] = useState([]);
 
   const { results, error, isLoading, loadResultsForUser } = useQuizContext();
 
@@ -103,6 +128,14 @@ export const NewProfile = () => {
   useEffect(() => {
     if (user && results.length > 0) {
       const userQuizzes = groupResults(results, 'weekNumber');
+
+      const preparedData = prepareUserQuizzesForVisualization(
+        'Weeks',
+        'Score',
+        userQuizzes
+      );
+      setChartData(preparedData);
+
       const completedList = listCompletedQuizzes(userQuizzes);
       const availableQuiz = findAvailableQuiz(quizSchedule, completedList);
       setQuizStatusList(availableQuiz);
@@ -153,7 +186,9 @@ export const NewProfile = () => {
           </Content>
         </>
       )}
-      <Aside />
+      <Aside>
+        <ColumnChart title='Quiz Results' chartData={chartData} />
+      </Aside>
     </div>
   );
 };
