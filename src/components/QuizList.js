@@ -7,8 +7,11 @@ export const QuizList = ({ questions, user }) => {
   const [quizAnswers, setQuizAnswers] = useState([]);
   const { error, isSaving, saveQuizResults } = useQuizContext();
   const navigate = useNavigate();
+  let currentUserId = '';
 
-  console.log(isSaving);
+  if (user) {
+    currentUserId = user.uid;
+  }
 
   useEffect(() => {
     if (!isSaving) {
@@ -24,19 +27,18 @@ export const QuizList = ({ questions, user }) => {
           (a) => a.questionNumber === answer.questionNumber
         );
         if (answerIndex === -1) {
-          updatedAnswers.push({ ...answer, userId: user.uid });
+          updatedAnswers.push({ ...answer, userId: currentUserId });
         } else {
-          updatedAnswers[answerIndex] = { ...answer, userId: user.uid };
+          updatedAnswers[answerIndex] = { ...answer, userId: currentUserId };
         }
         return updatedAnswers;
       });
     },
-    [user.uid]
+    [currentUserId]
   );
 
   const handleSubmit = (e) => {
     e.preventDefault();
-
     saveQuizResults(quizAnswers);
   };
 

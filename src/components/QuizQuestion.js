@@ -14,6 +14,18 @@ export const QuizQuestion = ({ question, number, updateAnswers }) => {
     }
   }, [answer, updateAnswers]);
 
+  const handleChange = (weekNumber, questionNumber, choice, correctAnswer) => {
+    const checkAnswer = choice === correctAnswer;
+
+    setAnswer((prevState) => ({
+      ...prevState,
+      weekNumber,
+      questionNumber,
+      answer: choice,
+      correct: checkAnswer,
+    }));
+  };
+
   const qNumber = number + 1;
   return (
     <div className='app-form'>
@@ -31,13 +43,12 @@ export const QuizQuestion = ({ question, number, updateAnswers }) => {
                 value={choice}
                 className='form-check-input'
                 onChange={() =>
-                  setAnswer({
-                    ...answer,
-                    weekNumber: question.weekNumber,
-                    questionNumber: question.questionNumber,
-                    answer: choice,
-                    correct: question.correctAnswer === choice,
-                  })
+                  handleChange(
+                    question.weekNumber,
+                    question.questionNumber,
+                    choice,
+                    question.correctAnswer
+                  )
                 }
               />
               <span>{choice}</span>
